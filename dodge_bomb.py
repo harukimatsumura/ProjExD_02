@@ -1,3 +1,4 @@
+import random
 import pygame as pg
 import sys
 
@@ -10,8 +11,10 @@ def main():
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     tmr = 0
     bb_img=pg.Surface((20,20))
-    pg.draw.circle(bb_img,(255,0,0),(10,10),10)
+    pg.draw.circle(bb_img,(255,0,0),(10,10),10)  # 爆弾の色、サイズ
     bb_img.set_colorkey((0,0,0))
+    x,y=random.randint(0,1600),random.randint(0,900)
+    screen.blit(bb_img,[x,y])
 
     while True:
         for event in pg.event.get():
@@ -21,7 +24,8 @@ def main():
         tmr += 1
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
-
+        screen.blit(bb_img,[x,y])
+        
         pg.display.update()
         clock.tick(1000)
 
