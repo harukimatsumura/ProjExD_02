@@ -8,7 +8,22 @@ delta={
     pg.K_RIGHT:(+1,0),
 
     }
- 
+def init():
+    kk_img=pg.image.load("ex02/fig/3.png")
+    kk_img=pg.transform.rotozoom(kk_img,0,2.0)
+    kk_img={
+        (0,-1):pg.pg.transform.rotozoom(kk_img,270,1.0), #  追加未完成
+        (+1,-1):pg.transform.rotozoom(kk_img,315,1.0),#　追加未完成
+        (+1,0):pg.transform.rotozoom(kk_img,0,1.0),#　　追加未完成
+        (+1,+1):pg.transform.rotozoom(kk_img,45,1.0),#　追加未完成
+        (0,+1):pg.transform.rotozoom(kk_img,90,1.0),#　追加未完成
+        (-1,+1):pg.transform.rotozoom(kk_img,135,1.0),#　追加未完成
+        (-1,0):pg.transform.rotozoom(kk_img,180,1.0),#　追加未完成
+        (-1,-1):pg.transform.rotozoom(kk_img,225,1.0),#　追加未完成
+    }
+
+
+    
 def check_bound(scr_rct:pg.Rect,obj_rct:pg.Rect) -> tuple[bool,bool]:
     """
     オブジェクトが画面内or画面外を判定し、真理値タプルを返す関数
@@ -32,6 +47,8 @@ def main():
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     kk_rct=kk_img.get_rect()
     kk_rct.center=900,400
+    
+    
     tmr = 0
     bb_img=pg.Surface((20,20))
     pg.draw.circle(bb_img,(255,0,0),(10,10),10)  # 爆弾の色、サイズ
@@ -42,7 +59,14 @@ def main():
     bb_rct=bb_img.get_rect()
     bb_rct.center=x,y
     tmr=0
-
+    """accs=[a for a in range(1,11)]
+    for r in range(1,11):
+        bb_img=pg.Surface((20*r,20*r))
+        pg.draw.circle(bb_img,(255,0,0),(10*r,10*r),10*r)
+        pg_img.append(bb_img)
+    avx,avy=vx*accs[min(tmr//1000,9)],vy*accs[min(tmr//100,9)]
+    bb_img=bb_imgs[min(tmr//1000,9)]    
+"""
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -68,7 +92,7 @@ def main():
             vy *= -1    
         screen.blit(bb_img,bb_rct)
         if kk_rct.colliderect(bb_rct):
-            return  #練習⑥
+            return  #練習6 *⑥
         pg.display.update()
         clock.tick(1000)
 
